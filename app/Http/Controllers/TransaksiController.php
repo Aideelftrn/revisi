@@ -193,14 +193,17 @@ class TransaksiController extends Controller
             $transaksiAdmin = Transaksi::with('penyetoranSampah')->get();
         }
         $totalSelisihAdmin = 0;
+        $totalBerat = 0;
         foreach ($transaksiAdmin as $transaksi) {
             $penyetoranSampah = $transaksi->penyetoranSampah;
             $selisihAdmin = $penyetoranSampah->pembelian->harga_pembelian - $penyetoranSampah->sampah->harga_jual;
+            $totalBerat = $penyetoranSampah->berat;
             $totalSelisihAdmin += $selisihAdmin;
         }
 
         $pdf = Pdf::loadView('transaksi.transaksi_pdf', [
             'transaksiAdmin' => $transaksiAdmin,
+            'totalBerat' => $totalBerat,
             'totalSelisihAdmin' => $totalSelisihAdmin,
             'tanggalAwal' => $tanggalAwal,
             'tanggalAkhir' => $tanggalAkhir,

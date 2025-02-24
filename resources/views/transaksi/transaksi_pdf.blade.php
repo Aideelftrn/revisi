@@ -162,12 +162,13 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Kode Transaksi</th>
-                        <th>Nasabah</th>
-                        <th>Pengepul</th>
+                        <th>Nama Sampah</th>
+                        <th>Berat</th>
+                        <th>Harga Jual</th>
                         <th>Pendapatan Nasabah</th>
+                        <th>Harga Jual</th>
                         <th>Laba Admin</th>
-                        <th>Harga Penjualan</th>
+                        <th>Total Penjualan</th>
                         <th>Tanggal</th>
                     </tr>
                 </thead>
@@ -175,14 +176,18 @@
                     @foreach ($transaksiAdmin as $transaksi)
                         <tr>
                             <td>{{ $transaksi->id }}</td>
-                            <td>{{ $transaksi->kode_transaksi }}</td>
-                            <td>{{ $transaksi->nasabah->nama_nasabah }}</td>
-                            <td>{{ $transaksi->pengepul->nama_pengepul }}</td>
+                            <td>{{ $transaksi->penyetoranSampah->sampah->nama_sampah }}</td>
+                            <td>{{ $transaksi->penyetoranSampah->berat }}</td>
+                            <td>Rp {{ number_format($transaksi->penyetoranSampah->sampah->harga_jual, 0, ',', '.') }}
+                            </td>
+                            <td>Rp {{ number_format($transaksi->jumlah, 0, ',', '.') }}</td>
                             <td>Rp {{ number_format($transaksi->penyetoranSampah->total_harga, 0, ',', '.') }}</td>
                             <td>Rp
                                 {{ number_format($transaksi->penyetoranSampah->pembelian->harga_pembelian - $transaksi->penyetoranSampah->sampah->harga_jual, 0, ',', '.') }}
                             </td>
-                            <td>Rp {{ number_format($transaksi->jumlah, 0, ',', '.') }}</td>
+                            <td>Rp
+                                {{ number_format($transaksi->jumlah * $transaksi->penyetoranSampah->berat, 0, ',', '.') }}
+                            </td>
                             <td>{{ \Carbon\Carbon::parse($transaksi->tanggal_transaksi)->locale('id')->isoFormat('D MMMM YYYY') }}
                             </td>
                         </tr>
@@ -190,7 +195,7 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th colspan="5" class="text-right">Total</th>
+                        <th colspan="6" class="text-right">Total</th>
 
                         <!-- <td colspan="1" class="empty-cell"></td> -->
                         <td class="text-kol">
@@ -199,7 +204,7 @@
                         <td class="text-kol">
                             <strong>Rp {{ number_format($transaksiAdmin->sum('jumlah'), 0, ',', '.') }}</strong>
                         </td>
-                        <td colspan="1" class="empty-cell"></td>
+                        <td colspan="2" class="empty-cell"></td>
 
                     </tr>
                 </tfoot>
