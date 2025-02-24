@@ -183,14 +183,19 @@ class TransaksiController extends Controller
         $tanggalAwal = $request->tanggal_awal;
         $tanggalAkhir = $request->tanggal_akhir;
 
-        $transaksiAdmin = Transaksi::whereHas('penyetoranSampah', function ($query) use ($tanggalAwal, $tanggalAkhir) {
-            $query->whereBetween('tanggal_transaksi', [$tanggalAwal, $tanggalAkhir]);
-        })->get();
-
+        $transaksiAdmin = Transaksi::with('penyetoranSampah')->get();
+        if ($tanggalAwal && $tanggalAkhir) {
+            $transaksiAdmin = Transaksi::with('penyetoranSampah')
+                ->whereDate('created_at', '>=', $tanggalAwal)
+                ->whereDate('created_at', '<=', $tanggalAkhir)
+                ->get();
+        } else {
+            $transaksiAdmin = Transaksi::with('penyetoranSampah')->get();
+        }
         $totalSelisihAdmin = 0;
         foreach ($transaksiAdmin as $transaksi) {
             $penyetoranSampah = $transaksi->penyetoranSampah;
-            $selisihAdmin = $penyetoranSampah->total_harga_jual - $penyetoranSampah->total_harga;
+            $selisihAdmin = $penyetoranSampah->pembelian->harga_pembelian - $penyetoranSampah->sampah->harga_jual;
             $totalSelisihAdmin += $selisihAdmin;
         }
 
