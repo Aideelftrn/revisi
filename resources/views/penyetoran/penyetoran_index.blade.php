@@ -29,6 +29,7 @@
                         <th>Berat (Kg)</th>
                         <th>Tanggal</th>
                         <th>Total</th>
+                        <th>Status</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -42,15 +43,27 @@
                             <td>{{ \Carbon\Carbon::parse($item->created_at)->locale('id')->isoFormat('D MMMM YYYY') }}</td>
                             <td>Rp. {{ number_format($item->berat * $item->sampah->harga_jual, 0, ',', '.') }}</td>
                             <td>
+                                <span
+                                    class="badge
+                                    @if ($item->status == 'terjual') badge-success
+                                    @elseif($item->status == 'pending') badge-warning
+                                    @elseif($item->status == 'baru') badge-info
+                                    @else badge-secondary @endif">
+                                    {{ $item->status }}
+                                </span>
+                            </td>
+                            <td>
                                 <div class="d-flex">
-                                    <a href="{{ route('penyetoran.edit', $item->id) }}"
-                                        class="btn btn-warning btn-sm mr-1">Edit</a>
-                                    <form action="{{ route('penyetoran.destroy', $item->id) }}" method="POST"
-                                        onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?');">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
-                                    </form>
+                                    @if ($item->status != 'terjual')
+                                        <a href="{{ route('penyetoran.edit', $item->id) }}"
+                                            class="btn btn-warning btn-sm mr-1">Edit</a>
+                                        <form action="{{ route('penyetoran.destroy', $item->id) }}" method="POST"
+                                            onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?');">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                                        </form>
+                                    @endif
                                 </div>
                             </td>
                         @empty

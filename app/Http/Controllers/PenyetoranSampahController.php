@@ -80,7 +80,7 @@ class PenyetoranSampahController extends Controller
             ]);
 
             $nasabah = Nasabah::find($request->nasabah_id);
-            // $nasabah->saldo -= $totalHarga;
+            $nasabah->saldo += $totalHarga; // Menambahkan saldo nasabah
             $nasabah->save();
 
             DB::commit();
@@ -111,11 +111,26 @@ class PenyetoranSampahController extends Controller
         ]);
 
         $penyetoran = PenyetoranSampah::findOrFail($id);
-        $penyetoran->berat = $request->input('berat');
-        $penyetoran->save();
-        flash('Berhasil Edit Penyetoran Sampah');
+        $sampah = Sampah::findOrFail($penyetoran->sampah_id);
+        $newTotalHarga = $sampah->harga_jual * $request->input('berat');
 
-        return redirect()->route('penyetoran.index')->with('success', 'Penyetoran sampah berhasil diperbarui');
+        DB::beginTransaction();
+        try {
+            $penyetoran->berat = $request->input('berat');
+            $penyetoran->save();
+
+            $nasabah = Nasabah::findOrFail($penyetoran->nasabah_id);
+            $nasabah->saldo += $newTotalHarga;
+            $nasabah->save();
+
+            DB::commit();
+            flash('Berhasil Edit Penyetoran Sampah');
+
+            return redirect()->route('penyetoran.index')->with('success', 'Penyetoran sampah berhasil diperbarui');
+        } catch (\Throwable $e) {
+            DB::rollback();
+            return back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+        }
     }
 
     public function show(string $id)
@@ -131,6 +146,12 @@ class PenyetoranSampahController extends Controller
     public function destroy(string $id)
     {
         $penyetoranSampah = PenyetoranSampah::findOrFail($id);
+        $nasabah = Nasabah::findOrFail($penyetoranSampah->nasabah_id);
+        $sampah = Sampah::findOrFail($penyetoranSampah->sampah_id);
+        $totalHarga = $sampah->harga_jual * $penyetoranSampah->berat;
+        $nasabah->saldo -= $totalHarga; // Mengurangi saldo nasabah
+        $nasabah->save();
+
         $penyetoranSampah->delete();
         flash('Berhasil Hapus Penyetoran Sampah');
 
