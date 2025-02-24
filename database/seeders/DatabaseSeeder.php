@@ -28,7 +28,7 @@ class DatabaseSeeder extends Seeder
             NasabahSeeder::class,
             PengepulSeeder::class,
             SampahSeeder::class,
-  
+
 
         ]);
     }

@@ -13,7 +13,9 @@
 
     <!-- Custom fonts for this template-->
     <link href="{{ asset('custom-style') }}/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
     <!-- Custom styles for this template-->
     <link href="{{ asset('custom-style') }}/css/sb-admin-2.css" rel="stylesheet">
     <link href="{{ asset('custom-style') }}/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
@@ -64,16 +66,16 @@
 
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/dashboard">
                 <div class="sidebar-brand-icon rotate-n-15">
-                    <img src="/custom-style-v2/assets/img/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                    <img src="/custom-style-v2/assets/img/logo.png" width="30" height="30"
+                        class="d-inline-block align-top" alt="">
                 </div>
 
                 @if (auth()->user()->role == 'admin')
-                <div class="sidebar-brand-text mx-1">Admin</div>
+                    <div class="sidebar-brand-text mx-1">Admin</div>
                 @elseif (auth()->user()->role == 'pengepul')
-                <div class="sidebar-brand-text mx-1">Pengepul</div>
+                    <div class="sidebar-brand-text mx-1">Pengepul</div>
                 @elseif (auth()->user()->role == 'nasabah')
-                <div class="sidebar-brand-text mx-1">Nasabah</div>
-
+                    <div class="sidebar-brand-text mx-1">Nasabah</div>
                 @endif
             </a>
 
@@ -81,109 +83,107 @@
 
 
             @if (auth()->user()->role == 'admin')
-            <li class="nav-item {{ Route::is('home*') ? 'active' : '' }}">
-                <a class="nav-link" href="/dashboard">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
-            </li>
-            <li class="nav-item {{ Route::is('user.index') ? 'active' : '' }} ">
-                <a class="nav-link" href="/user">
-                    <i class="fas fa-fw fa-users"></i>
-                    <span>Data User</span></a>
-            </li>
-            <li class="nav-item {{ Route::is('nasabah.index') ? 'active' : '' }} ">
-                <a class="nav-link" href="/nasabah">
-                    <i class="fas fa-fw fa-user-friends"></i>
-                    <span>Data Nasabah</span></a>
-            </li>
-            <li class="nav-item {{ Route::is('pengepul.index') ? 'active' : '' }} ">
-                <a class="nav-link" href="/pengepul">
-                    <i class="fas fa-fw fa-user-tie"></i>
-                    <span>Data Pengepul</span></a>
-            </li>
-            <li class="nav-item {{ Route::is('transaksi.index') ? 'active' : '' }} ">
-                <a class="nav-link" href="/transaksi">
-                    <i class="fas fa-fw fa-exchange-alt"></i>
-                    <span>Data Transaksi</span></a>
-            </li>
-            <li class="nav-item {{ Route::is('penyetoran.index') ? 'active' : '' }} ">
-                <a class="nav-link" href="/penyetoran">
-                    <i class="fas fa-fw fa-donate"></i>
-                    <span>Penyetoran Sampah</span></a>
-            </li>
-            <li class="nav-item {{ Route::is('sampah.index') ? 'active' : '' }} ">
-                <a class="nav-link" href="/sampah">
-                    <i class="fas fa-fw fa-trash"></i>
-                    <span>Data Sampah</span></a>
-            </li>
-            <li class="nav-item {{ Route::is('pembelian.index') ? 'active' : '' }} ">
-                <a class="nav-link" href="/pembelian">
-                    <i class="fas fa-fw fa-shopping-cart"></i>
-                    <span>Pembelian Sampah</span></a>
-            </li>
-            <li class="nav-item {{ Route::is('penarikan.approval') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('penarikan.approval') }}">
-                    <i class="fas fa-fw fa-check-circle"></i>
-                    <span>Daftar Penarikan</span>
-                </a>
-            </li>
-            <li class="nav-item {{ Route::is('pengepul.topups') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('pengepul.topups') }}">
-                    <i class="fas fa-fw fa-dollar-sign"></i>
-                    <span>Daftar Top Up</span>
-                </a>
-            </li>
-
-
+                <li class="nav-item {{ Route::is('home*') ? 'active' : '' }}">
+                    <a class="nav-link" href="/dashboard">
+                        <i class="fas fa-fw fa-tachometer-alt"></i>
+                        <span>Dashboard</span></a>
+                </li>
+                <li class="nav-item {{ Route::is('user.index') ? 'active' : '' }} ">
+                    <a class="nav-link" href="/user">
+                        <i class="fas fa-fw fa-users"></i>
+                        <span>Data User</span></a>
+                </li>
+                <li class="nav-item {{ Route::is('nasabah.index') ? 'active' : '' }} ">
+                    <a class="nav-link" href="/nasabah">
+                        <i class="fas fa-fw fa-user-friends"></i>
+                        <span>Data Nasabah</span></a>
+                </li>
+                <li class="nav-item {{ Route::is('pengepul.index') ? 'active' : '' }} ">
+                    <a class="nav-link" href="/pengepul">
+                        <i class="fas fa-fw fa-user-tie"></i>
+                        <span>Data Pengepul</span></a>
+                </li>
+                <li class="nav-item {{ Route::is('transaksi.index') ? 'active' : '' }} ">
+                    <a class="nav-link" href="/transaksi">
+                        <i class="fas fa-fw fa-exchange-alt"></i>
+                        <span>Data Transaksi</span></a>
+                </li>
+                <li class="nav-item {{ Route::is('penyetoran.index') ? 'active' : '' }} ">
+                    <a class="nav-link" href="/penyetoran">
+                        <i class="fas fa-fw fa-donate"></i>
+                        <span>Penyetoran Sampah</span></a>
+                </li>
+                <li class="nav-item {{ Route::is('sampah.index') ? 'active' : '' }} ">
+                    <a class="nav-link" href="/sampah">
+                        <i class="fas fa-fw fa-trash"></i>
+                        <span>Data Sampah</span></a>
+                </li>
+                <li class="nav-item {{ Route::is('penjualan.index') ? 'active' : '' }} ">
+                    <a class="nav-link" href="/penjualan">
+                        <i class="fas fa-fw fa-shopping-cart"></i>
+                        <span>Penjualan Sampah</span></a>
+                </li>
+                <li class="nav-item {{ Route::is('penarikan.approval') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('penarikan.approval') }}">
+                        <i class="fas fa-fw fa-check-circle"></i>
+                        <span>Daftar Penarikan</span>
+                    </a>
+                </li>
+                <li class="nav-item {{ Route::is('pengepul.topups') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('pengepul.topups') }}">
+                        <i class="fas fa-fw fa-dollar-sign"></i>
+                        <span>Daftar Top Up</span>
+                    </a>
+                </li>
             @elseif (auth()->user()->role == 'pengepul')
-            <li class="nav-item {{ Route::is('pembelian.index') ? 'active' : '' }} ">
-                <a class="nav-link" href="/pembelian">
-                    <i class="fas fa-fw fa-shopping-cart"></i>
-                    <span>Pembelian Sampah</span></a>
-            </li>
-            <li class="nav-item {{ Route::is('transaksi.index') ? 'active' : '' }} ">
-                <a class="nav-link" href="/transaksi">
-                    <i class="fas fa-fw fa-exchange-alt"></i>
-                    <span>Data Transaksi</span></a>
-            </li>
-            <li class="nav-item {{ Route::is('pengepul.topup.form') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('pengepul.topup.form', ['id' => auth()->user()->pengepul->id]) }}">
-                    <i class="fas fa-fw fa-plus-circle"></i>
-                    <span>Top Up Saldo</span>
-                </a>
-            </li>
-            <li class="nav-item {{ Route::is('pengepul.riwayatTopup') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('pengepul.riwayatTopup', ['id' => auth()->user()->pengepul->id]) }}">
-                    <i class="fas fa-fw fa-history"></i>
-                    <span>Riwayat Topup</span>
-                </a>
-            </li>
-
-
+                <li class="nav-item {{ Route::is('pembelian.index') ? 'active' : '' }} ">
+                    <a class="nav-link" href="/pembelian">
+                        <i class="fas fa-fw fa-shopping-cart"></i>
+                        <span>Pembelian Sampah</span></a>
+                </li>
+                <li class="nav-item {{ Route::is('transaksi.index') ? 'active' : '' }} ">
+                    <a class="nav-link" href="/transaksi">
+                        <i class="fas fa-fw fa-exchange-alt"></i>
+                        <span>Data Transaksi</span></a>
+                </li>
+                <li class="nav-item {{ Route::is('pengepul.topup.form') ? 'active' : '' }}">
+                    <a class="nav-link"
+                        href="{{ route('pengepul.topup.form', ['id' => auth()->user()->pengepul->id]) }}">
+                        <i class="fas fa-fw fa-plus-circle"></i>
+                        <span>Top Up Saldo</span>
+                    </a>
+                </li>
+                <li class="nav-item {{ Route::is('pengepul.riwayatTopup') ? 'active' : '' }}">
+                    <a class="nav-link"
+                        href="{{ route('pengepul.riwayatTopup', ['id' => auth()->user()->pengepul->id]) }}">
+                        <i class="fas fa-fw fa-history"></i>
+                        <span>Riwayat Topup</span>
+                    </a>
+                </li>
             @elseif (auth()->user()->role == 'nasabah')
-            <li class="nav-item {{ Route::is('penyetoran.index') ? 'active' : '' }} ">
-                <a class="nav-link" href="/penyetoran">
-                    <i class="fas fa-fw fa-donate"></i>
-                    <span>Penyetoran Sampah</span></a>
-            </li>
-            <li class="nav-item {{ Route::is('transaksi.index') ? 'active' : '' }} ">
-                <a class="nav-link" href="/transaksi">
-                    <i class="fas fa-fw fa-exchange-alt"></i>
-                    <span>Data Transaksi</span></a>
-            </li>
-            <li class="nav-item {{ Route::is('nasabah.saldo') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('nasabah.saldo', ['id' => auth()->user()->nasabah->id]) }}">
-                    <i class="fas fa-fw fa-wallet"></i>
-                    <span>Rincian Saldo</span>
-                </a>
-            </li>
-            <li class="nav-item {{ Route::is('nasabah.riwayatPenarikan') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('nasabah.riwayatPenarikan', ['id' => auth()->user()->nasabah->id]) }}">
-                    <i class="fas fa-fw fa-history"></i>
-                    <span>Riwayat Penarikan</span>
-                </a>
-            </li>
-
+                <li class="nav-item {{ Route::is('penyetoran.index') ? 'active' : '' }} ">
+                    <a class="nav-link" href="/penyetoran">
+                        <i class="fas fa-fw fa-donate"></i>
+                        <span>Penyetoran Sampah</span></a>
+                </li>
+                <li class="nav-item {{ Route::is('transaksi.index') ? 'active' : '' }} ">
+                    <a class="nav-link" href="/transaksi">
+                        <i class="fas fa-fw fa-exchange-alt"></i>
+                        <span>Data Transaksi</span></a>
+                </li>
+                <li class="nav-item {{ Route::is('nasabah.saldo') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('nasabah.saldo', ['id' => auth()->user()->nasabah->id]) }}">
+                        <i class="fas fa-fw fa-wallet"></i>
+                        <span>Rincian Saldo</span>
+                    </a>
+                </li>
+                <li class="nav-item {{ Route::is('nasabah.riwayatPenarikan') ? 'active' : '' }}">
+                    <a class="nav-link"
+                        href="{{ route('nasabah.riwayatPenarikan', ['id' => auth()->user()->nasabah->id]) }}">
+                        <i class="fas fa-fw fa-history"></i>
+                        <span>Riwayat Penarikan</span>
+                    </a>
+                </li>
             @endif
 
 
@@ -224,20 +224,27 @@
 
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 @if (auth()->user()->role == 'pengepul')
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Saldo: {{ number_format(auth()->user()->pengepul->saldo, 0, ',', '.') }}</span>
+                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">Saldo:
+                                        {{ number_format(auth()->user()->pengepul->saldo, 0, ',', '.') }}</span>
                                 @elseif (auth()->user()->role == 'nasabah')
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Saldo: {{ number_format(auth()->user()->nasabah->saldo, 0, ',', '.') }}</span>
+                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">Saldo:
+                                        {{ number_format(auth()->user()->nasabah->saldo, 0, ',', '.') }}</span>
                                 @elseif (auth()->user()->role == 'admin')
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Saldo: {{ number_format(auth()->user()->saldo, 0, ',', '.') }}</span>
+                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">Saldo:
+                                        {{ number_format(auth()->user()->saldo, 0, ',', '.') }}</span>
                                 @endif
                                 <div class="topbar-divider d-none d-sm-block"></div>
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ auth()->user()->name }}</span>
+                                <span
+                                    class="mr-2 d-none d-lg-inline text-gray-600 small">{{ auth()->user()->name }}</span>
                                 <div class="topbar-divider d-none d-sm-block"></div>
-                                <img class="img-profile rounded-circle" src="{{ asset('custom-style/img/undraw_profile.svg') }}">
+                                <img class="img-profile rounded-circle"
+                                    src="{{ asset('custom-style/img/undraw_profile.svg') }}">
                             </a>
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="userDropdown">
                                 <a class="dropdown-item" href="/profil/create">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
@@ -280,7 +287,8 @@
         <i class="fas fa-angle-up"></i>
     </a>
 
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -311,6 +319,7 @@
             $('#dataTable').DataTable();
         });
     </script>
+    @yield('script')
 </body>
 
 </html>

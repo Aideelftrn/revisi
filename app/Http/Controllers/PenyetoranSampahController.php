@@ -34,7 +34,7 @@ class PenyetoranSampahController extends Controller
 
         $data['judul'] = 'Data Penyetoran Sampah';
         $data['penyetoranSampahs'] = $query->paginate(10);
-        $data['judul'] = 'Data Sampah';
+        $data['judul'] = 'Data Penyetoran Sampah';
         $data['sampahs'] = Sampah::latest()->paginate(10);
 
         return view('penyetoran.penyetoran_index', $data);
@@ -107,12 +107,11 @@ class PenyetoranSampahController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'total_harga_jual' => 'required|numeric',
+            'berat' => 'required|numeric',
         ]);
 
         $penyetoran = PenyetoranSampah::findOrFail($id);
-        $penyetoran->total_harga_jual = $request->input('total_harga_jual');
-        $penyetoran->update(['status' => 'baru']);
+        $penyetoran->berat = $request->input('berat');
         $penyetoran->save();
         flash('Berhasil Edit Penyetoran Sampah');
 
@@ -128,5 +127,13 @@ class PenyetoranSampahController extends Controller
         return view('penyetoran.penyetoran_detail', $data);
     }
 
+    //fungsi untuk hapus data penyetoran sampah
+    public function destroy(string $id)
+    {
+        $penyetoranSampah = PenyetoranSampah::findOrFail($id);
+        $penyetoranSampah->delete();
+        flash('Berhasil Hapus Penyetoran Sampah');
 
+        return redirect()->route('penyetoran.index')->with('success', 'Penyetoran sampah berhasil dihapus');
+    }
 }

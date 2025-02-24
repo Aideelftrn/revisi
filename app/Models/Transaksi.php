@@ -19,11 +19,11 @@ class Transaksi extends Model
 
     public function pengepul()
     {
-        return $this->belongsTo(Pengepul::class, 'pengepul_id'); 
+        return $this->belongsTo(Pengepul::class, 'pengepul_id');
     }
 
     public function penyetoranSampah(): BelongsTo
     {
-        return $this->belongsTo(PenyetoranSampah::class, 'id');
+        return $this->belongsTo(PenyetoranSampah::class, 'penyetoran_sampah_id');
     }
 }
